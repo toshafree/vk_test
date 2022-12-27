@@ -19,7 +19,9 @@ module.exports = {
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
+    ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css' }]
   ],
 
   /**
@@ -59,14 +61,25 @@ module.exports = {
           title: 'Guide',
           collapsable: false,
           children: [
+            'change-history',
+            'introduction',
+            'quick-start',
             '',
             'using-vue',
+            'sample-doc'
           ]
         }
       ],
+
     }
   },
-
+  markdown: {
+    extendMarkdown: md => {
+      // use more markdown-it plugins!
+      md.use(require('markdown-it-attrs')),
+      md.use(require('markdown-it-katex'))
+    }
+  },
   /**
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
